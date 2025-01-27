@@ -10,10 +10,16 @@ DB_NAME = "railway"
 DB_USER = "postgres"
 DB_PASSWORD = "UsaIzlkIxYIJLSbwqnwqlHcBqWRaULsa"
 
-# Disable actions (e.g., zoom, pan, reset) for embedded charts
-alt.renderers.set_embed_options(actions=False)
+# # Disable actions (e.g., zoom, pan, reset) for embedded charts
+# alt.renderers.set_embed_options(actions=False)
 
-
+hide_streamlit_style = """
+            <style>
+            #MainMenu {visibility: hidden;}
+            footer {visibility: hidden;}
+            </style>
+            """
+st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 def get_db_connection():
     engine = create_engine(f"postgresql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}")
     return engine
@@ -172,9 +178,6 @@ else:
     st.altair_chart(combined_chart, theme= None, use_container_width=True)
     # st.altair_chart(price_difference_chart, use_container_width=True)
     st.altair_chart(price_difference_percentage_chart, theme= None, use_container_width=True)
-    
-    
-    
 
 #     # # Display data tables
 #     # st.subheader("Filtered Actual Prices")
